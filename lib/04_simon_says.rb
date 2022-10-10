@@ -19,27 +19,12 @@ def first_word(word)
 end
 
 def titleize(word)
-  stop_words = %w{and or of the nor a an to but for}.to_s
-    return word.split.map.exclude(stop_words)(&:capitalize).join(' ')
-    
+    all_cap = word.split.map{|i| i.capitalize}
 
-    nocaps = "and"
-    string.split(" ").map { |word| nocaps.include?(word) ? word : word.capitalize }.join(" ")
-    #{stop_words.include?(word) && index > 0 ? word : word.capitalize }
-    
-    #{stop_words.include?(word) && index > 0 ? word.capitalize}(&:capitalize).join(' ')
-
-    def titleize(str)
-        str.capitalize  # capitalize the first word in case it is part of the no words array
-        words_no_cap = ["and", "or", "the", "nor", "to", "the", "a", "but"]
-        phrase = str.split(" ").map {|word| 
-            if words_no_cap.include?(word) 
-                word
-            else
-                word.capitalize
-            end
-        }.join(" ") # I replaced the "end" in "end.join(" ") with "}" because it wasn't working in Ruby 2.1.1
-      phrase  # returns the phrase with all the excluded words
+    all_cap[1..-1].each do |i|
+      if i == "And" || i == "Of" || i == "The" || i == "Nor" || i == "Or" || i == "To" || i == "A" || i == "But"
+          i.downcase!
+      end
     end
+    all_cap.capitalize.join(" ")
 end
-
